@@ -4,7 +4,7 @@
   "description": "Currated Spotify playlist based on your current location's weather",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,8 @@
     "mongoose": "^7.0.1",
     "nodemon": "^2.0.21",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -49,6 +50,7 @@
     "sass": "^1.58.3",
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.7",
     "webpack": "^5.76.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
