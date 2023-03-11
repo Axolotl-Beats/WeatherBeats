@@ -3,14 +3,13 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App';
 
-
 // TODO: create and import store
 // TODO: create and import App
 
-const root = createRoot(document.getElementById('app'))
+const root = createRoot(document.getElementById('app'));
 
 root.render(
-  // <Provider store={store}>
+  <Provider store={store}>
     <App />
-  // </Provider>
-)
+  </Provider>,
+);

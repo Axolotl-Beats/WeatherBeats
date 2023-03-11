@@ -59,7 +59,7 @@ module.exports = {
   ],
   devServer: {
     // for routing
-    //historyApiFallback: true,
+    // historyApiFallback: true,
     // HMR nodemon for webpack
     hot: true,
     liveReload: true,
@@ -70,7 +70,7 @@ module.exports = {
     },
     compress: true,
     // opens window when changes happen (can be annoying beware)
-    //open: true,
+    // open: true,
     port: 8080,
     // proxy: {
     //   '/api': {
