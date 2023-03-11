@@ -14,6 +14,6 @@ async function getWeather(zip) {
   console.log(responseObj);
   return apiResponse;
 }
-getWeather('32080');
+getWeather('94016');
 
 // console.log(data);
