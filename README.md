@@ -9,3 +9,4 @@ Weather API Source:  https://openweathermap.org/api
 2. To use `async` with dispatcher
    1. <https://redux.js.org/usage/configuring-your-store#extending-redux-functionality>
 
+y
