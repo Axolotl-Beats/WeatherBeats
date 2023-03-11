@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-import useSetState from 'react-use';
-import SpotifyPlayer from 'react-spotify-web-playback';
-import SpotifyWebApi from 'spotify-web-api-node';
 // using dotenv
 
 // functional coponents only guys
@@ -17,7 +14,7 @@ function App() {
     <div>
       <h1>Hello World</h1>
       <div>
-        <iframe title="title" src="https://open.spotify.com/embed/playlist/0RH319xCjeU8VyTSqCF6M4?utm_source=generator" width="30%" height="200" frameBorder="0" allowfullscreen="" async />
+        <iframe title="title" src="https://open.spotify.com/embed/playlist/0RH319xCjeU8VyTSqCF6M4?utm_source=generator" width="30%" height="200" allowfullscreen="" async />
       </div>
     </div>
   );
