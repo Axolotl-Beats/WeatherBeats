@@ -9,7 +9,8 @@ import App from './App';
 const root = createRoot(document.getElementById('app'));
 
 root.render(
-  <Provider store={store}>
+// TODO: add store to provider
+  <Provider>
     <App />
   </Provider>,
 );
