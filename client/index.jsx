@@ -10,5 +10,7 @@ const root = createRoot(document.getElementById('app'));
 
 root.render(
 // TODO: add store to provider
-  <App />,
+  <Provider>
+    <App />
+  </Provider>,
 );
