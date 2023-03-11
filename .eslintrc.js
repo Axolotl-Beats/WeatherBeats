@@ -1,21 +1,21 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true,
+    mongo: true,
   },
   extends: [
     'plugin:react/recommended',
     'airbnb',
   ],
-  overrides: [
-  ],
+  overrides: [],
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   plugins: [
     'react',
   ],
   rules: {
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
 };

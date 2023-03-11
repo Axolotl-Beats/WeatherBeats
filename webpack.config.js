@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './client/index.jsx',
@@ -56,6 +57,10 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
+    new Dotenv({
+      path: path.resolve(__dirname, './.env'),
+      safe: true,
+    }),
   ],
   devServer: {
     // for routing
@@ -70,7 +75,7 @@ module.exports = {
     },
     compress: true,
     // opens window when changes happen (can be annoying beware)
-    // open: true,
+    open: true,
     port: 8080,
     // proxy: {
     //   '/api': {

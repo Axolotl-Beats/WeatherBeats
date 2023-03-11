@@ -9,8 +9,3 @@ Weather API Source:  https://openweathermap.org/api
 2. To use `async` with dispatcher
    1. <https://redux.js.org/usage/configuring-your-store#extending-redux-functionality>
 
-# Spotify Web Embed
-
-To solve this problem, I found it best to import an npm package that would do this for you. 
-
-- <https://www.npmjs.com/package/react-spotify-web-playback>
