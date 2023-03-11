@@ -2,3 +2,7 @@
 node_modules/
 build
 pnpm-lock.yaml
+dist/
+notes/
+public/
+
