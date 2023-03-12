@@ -1,10 +1,8 @@
-<<<<<<< Updated upstream
 import React from 'react';
 
 // functional coponents only guys
 
 function App() {
-=======
 import React, { useState, useEffect } from 'react';
 import WebPlayback from './components/WebPlayback';
 import Login from './components/Login';
@@ -47,7 +45,6 @@ function App() {
   }, []);
 
   // if token is empty, render login, else render web playback compennt
->>>>>>> Stashed changes
   return (
     <div>
       <h1>Hello World</h1>
