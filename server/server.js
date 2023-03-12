@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import express from 'express';
-
-const app = express();
-
-=======
 const express = require('express');
 const request = require('request');
 
@@ -57,7 +51,6 @@ app.get('/auth/callback', (req, res) => {
   };
 
   request.post(authOptions, (error, response, body) => {
-
     if (!error && response.statusCode === 200) {
       const { access_token } = body;
       res.redirect('/');
@@ -86,7 +79,6 @@ app.use((err, req, res) => {
   res.status(error.status).json(error.message);
 });
 
->>>>>>> Stashed changes
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
