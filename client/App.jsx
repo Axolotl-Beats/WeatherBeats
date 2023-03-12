@@ -1,13 +1,24 @@
 import React from 'react';
+import Login from './Login';
+import Main from './Main.jsx';
+import { useSelector } from 'react-redux';
+import { Link, Switch, Route, Router } from 'react-router-dom';
 
-// functional coponents only guys
 
-function App() {
+
+
+export default function App() {
+
   return (
     <div>
-      <h1>Hello World</h1>
+      {/* <section>
+        <Login></Login>
+      </section> */}
+      <div className="box has-color-danger">
+        <Main></Main>
+      </div>
+
     </div>
-  );
+  )
 }
 
-export default App;
