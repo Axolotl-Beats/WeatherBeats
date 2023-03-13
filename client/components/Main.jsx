@@ -17,9 +17,21 @@ export default function Main() {
       </div>
 
       <div class="hero-body">
-        <div class="container is-centered">
-          <div class="column is-5-tablet is-4-desktop is-4-widescreen">
-            <div class="card">
+        <div class="container has-text-centered">
+          {/* <div class="column is-5-tablet is-4-desktop is-4-widescreen has-text-centered"> */}
+           
+              <p class="title">
+                Title
+              </p>
+              <p class="subtitle">
+                Subtitle
+              </p>
+          
+            
+            
+            
+            
+            <div id='player' class="card">
               <div class="card-content">
                 <div class="content">
                   <div class="field">
@@ -30,7 +42,7 @@ export default function Main() {
                 </div>
               </div>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </div>
 

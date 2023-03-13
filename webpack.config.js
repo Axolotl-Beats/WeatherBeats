@@ -87,11 +87,11 @@ module.exports = {
     compress: true,
     // opens window when changes happen (can be annoying beware)
     // open: true,
-    port: 8080
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://127.0.0.1:3000',
-    //   },
-    // },
+    port: 8080,
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:3000',
+      },
+    },
   }
 };

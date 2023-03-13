@@ -1,19 +1,18 @@
 const express = require('express');
-const request = require('request');
+// const request = require('request');
 
 const app = express();
 const path = require('path');
 const PORT = 3000;
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 const weatherRouter = require('./routes/weather')
 
-app.use(express.json());
-
-
-app.use('/weather', weatherRouter);
+app.use('/api/weather', weatherRouter);
 
 app.use('*', (req, res) => res.sendStatus(404));
-
 
 app.use((err, req, res) => {
   const defaultErr = {

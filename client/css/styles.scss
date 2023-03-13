@@ -10,18 +10,29 @@
   background-position: center;
 }
 
-.topGrid  {
-  display: grid;
-  flex-direction: row;
-}
+// .topGrid  {
+//   display: grid;
+//   flex-direction: row;
+// }
 
-.infoBar  {
-  display: grid;
-  flex-direction: row;
-}
+// .infoBar  {
+//   display: grid;
+//   flex-direction: row;
+// }
 
-.card, .card-image {
+.card,
+.card-image,
+.box,
+.input {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
+}
+
+
+h1 {
+  font-size: 72px;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
