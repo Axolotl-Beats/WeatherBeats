@@ -35,6 +35,10 @@ export default function Zipcode() {
 
   // on button click, fire reducers to update state and re-render page with new location
 
+  }, [])
+
+  //on button click, fire reducers to update state and re-render page with new location
+
   function getNewWeatherData(input) {
     const body = JSON.stringify({ zip: input });
     console.log('This is the body:', body);
@@ -48,51 +52,43 @@ export default function Zipcode() {
       .then((response) => response.json())
       .then((response) => dispatch(updateAll(response)))
       .then((response) => console.log('This is the reponse after UpdateAll', response));
+      .then((response) => response.json())
+      .then((response) => dispatch(updateAll(response)))
+      .then((response) => console.log('This is the reponse after UpdateAll', response))
   }
 
   const { temp, city, type } = useSelector((state) => state.updater);
 
   return (
     <div className="column">
-      <div className="box is-align-content-center is-justify-content-center">
-        <div className="card-content">
-          <input className="input" type="text" placeholder="zipcode" onChange={(e) => setLocation(e.target.value)} />
-          <button className="button" onClick={() => getNewWeatherData(location)}>Update Location</button>
+      <div class='box is-align-content-center is-justify-content-center'>
+        <div class='card-content'>
+          <span>
 
-          <div className="field">
-            <p className="control has-icons-left has-icons-right">
-              <input className="input" type="email" placeholder="Email" />
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope" />
-              </span>
-              <span className="icon is-small is-right">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" /></svg>
-              </span>
-            </p>
-          </div>
-          <div className="field">
-            <p className="control has-icons-left">
-              <input className="input" type="password" placeholder="Password" />
-              <span className="icon is-small is-left">
-                <i className="fas fa-lock" />
-              </span>
-            </p>
-          </div>
+
+          </span>
         </div>
 
-        <footer className="card-footer">
-          <p className="card-footer-item is-size-4 has-text-grey is-capitalized">{type}</p>
-          <p className="card-footer-item is-size-4 has-text-grey">{city}</p>
-          <p className="card-footer-item is-size-4 has-text-grey">{temp}</p>
+        <div class="field has-addons">
+          <div class="control has-icons-left has-icons-right is-expanded">
+   
+            <input class='input has-text-weight-bold is-size-4' type="text" placeholder="ZIPCODE" onChange={(e) => setLocation(e.target.value)} />
+
+          </div>
+          <p class="control">
+ 
+            <a class='button is-primary has-text-weight-bold is-size-4 has-text-light' onClick={() => getNewWeatherData(location)}>Location</a>
+          </p>
+        </div>
+
+        <footer class="card-footer">
+          <p class="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{type}</p>
+          <p class="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{city}</p>
+          <p class="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{temp}</p>
         </footer>
 
       </div>
-      <br />
-      <div className="infoBar">
-        {temp}
-        {city}
-        {type}
-      </div>
+
     </div>
   );
 }

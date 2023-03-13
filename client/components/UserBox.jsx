@@ -6,11 +6,10 @@ export default function UserBox() {
 
   return (
     <div class='column'>
-      <div class='box'>
-        Welcome {username}!
+      <div class='box is-size-1 has-text-white is-full-height'>
+        <p>Welcome User{username}!</p>
         <button class='button is-primary is-small'>Log Out</button>
       </div>
-
     </div>
   )
 }
