@@ -5,8 +5,6 @@ import Icon from './Icon';
 
 export default function Main() {
 
-
-
   return (
     <div className="topGrid has-background-danger">
       <div className="weatherIcon">
@@ -22,7 +20,6 @@ export default function Main() {
     </div>
   )
 };
-
 
 {/* <div class="hero-head">
 </div>

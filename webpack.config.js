@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './client/index.js',
+  entry: './client/index.jsx',
   // Default to development
   mode: process.env.NODE_ENV || 'development',
   output: {

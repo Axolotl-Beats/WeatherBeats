@@ -7,6 +7,7 @@ const initialState = {
   zipcode: 10001,
   city: 'New York City',
   url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80'
+  // bg: url'.client/assets/image/sunny'
 };
 
 const stateSlice = createSlice({
