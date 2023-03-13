@@ -1,10 +1,14 @@
 const express = require('express');
 const session = require('express-session');
 const authRoutes = require('./routes/authRouter');
+const weatherRouter = require('./routes/weatherRouter');
 
 require('dotenv').config();
 
 const app = express();
+const path = require('path');
+
+const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,16 +26,13 @@ app.use(session({
 }));
 
 // Todo: get request for weather type
+dotenv.config();
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', 'http//localhost:8080');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-// });
-
-app.get('/', (req, res) => res.send('Hello World'));
+const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
+const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
 app.use('/auth', authRoutes);
+app.use('/weather', weatherRouter);
 
 app.get('/api/user', async (req, res, next) => {
   if (!req.session.user) {
@@ -46,6 +47,12 @@ app.get('/api/user', async (req, res, next) => {
   return res.status(200).json(data);
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+// added catch
+app.use('*', (req, res) => res.sendStatus(404));
+
+app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
+  console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app;
