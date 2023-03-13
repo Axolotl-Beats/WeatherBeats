@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import SpotifyPlayer from 'react-spotify-web-playback';
+import React from 'react';
+import { Spotify } from 'react-spotify-embed';
 
 function Player({ token, trackUri }) {
-  const [play, setPlay] = useState(false);
-
-  useEffect(() => {
-    setPlay(true);
-  }, [token]);
-
   return (
-    <SpotifyPlayer
-      token={token}
-      uris={[trackUri]}
-      styles={{
-        activeColor: '#fff',
-        bgColor: '#333',
-        color: '#fff',
-        loaderColor: '#fff',
-        sliderColor: '#1cb954',
-        trackArtistColor: '#ccc',
-        trackNameColor: '#fff',
-      }}
+    <Spotify
+      link={`https://open.spotify.com/album/0fUy6IdLHDpGNwavIlhEsl?si=mTiITmlHQpaGkoivGTv8Jw?access_token=${token}`}
+      size={{ width: '100%', height: 300 }}
+      view="coverart"
+      theme="black"
     />
   );
 }
