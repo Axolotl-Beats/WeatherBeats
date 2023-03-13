@@ -66,10 +66,10 @@ app.get('/auth/callback', async (req, res) => {
     });
     // stick it in an express session
     req.session.token = {
-      'accessToken' : data.access_token,
-      'refreshToken' : data.refresh_token,
-      'tokenTimeStamp' : Date.now(),
-    }
+      accessToken: data.access_token,
+      refreshToken: data.refresh_token,
+      tokenTimeStamp: Date.now(),
+    };
 
     // example fetching data from spotify using axios
     const userUrl = 'https://api.spotify.com/v1/me';
@@ -96,46 +96,43 @@ app.get('/auth/callback', async (req, res) => {
 // app.get('/auth/refreshToken', async (req, res) => {
 //   const refreshToken = req.query.refresh_token;
 
-
-
 // });
 
 // important for backend to grab token which i stored in sessions
-app.get('/auth/token', (req, res) => (
-  const { accessToken, refreshToken, tokenTimeStamp } = req.session;
+app.get('/auth/token', async (req, res) => {
+  const { refreshToken, tokenTimeStamp } = req.session;
   const currentTime = Date.now();
 
   // if token is expired
-  if(currentTime - tokenTimeStamp > 3600000) {
+  if (currentTime - tokenTimeStamp > 3600000) {
     // refresh token
     const authData = {
-      params : {
+      params: {
         grant_type: 'refresh_token',
         refresh_token: refreshToken,
         headers: {
           Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString('base64')}`,
-        }
-      }      
+        },
+      },
     };
 
     try {
       const { data } = await axios.post('https://accounts.spotify.com/api/token', authData);
-    const accessToken = data.access_token;
-    res.session.accessToken = accessToken;
-    res.session.refreshToken = refreshToken;
-    res.session.tokenTimeStamp = Date.now()
-    return res.json({
-      access_token: accessToken,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(400).send('Error refreshing access token');
-  }
-    
+      const accessToken = data.access_token;
+      res.session.accessToken = accessToken;
+      res.session.refreshToken = refreshToken;
+      res.session.tokenTimeStamp = Date.now();
+      return res.json({
+        access_token: accessToken,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(400).send('Error refreshing access token');
+    }
   }
 
-  res.json({ accessToken: req.session.accessToken })
-));
+  return res.json({ accessToken: req.session.accessToken });
+});
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
