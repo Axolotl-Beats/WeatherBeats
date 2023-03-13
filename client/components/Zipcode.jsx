@@ -8,7 +8,7 @@ import { updateZipcode } from '../redux/stateSlice';
 
 export default function Zipcode() {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState('10001');
   const [clicked, setClicked] = useState(false);
 
   // useSelector the temp, city, type
@@ -16,33 +16,36 @@ export default function Zipcode() {
 
   useEffect(() => {
     // on-load, fetch weather data from the weather API
+    console.log("We are pinging the weather API at", location)
 
-    const {
-      type, temp, city, url,
-    } = getWeatherData(location); // Uncomment this line when we are ready to get
+    let data = getWeatherData(location);
+    const { type, temp, city, url } = data;
+    // Uncomment this line when we are ready to get
     dispatch(updateZipcode(location));
     // we can also write a function to send zipcode to MongoDB
   }, [clicked]);
 
-  const weatherAPI = ''; // url
+  const weatherAPI = 'http://localhost:3000/weather'; // url
 
-  async function getWeatherData(input) {
-    await fetch(weatherAPI, {
-      method: 'GET',
-      header: {
+  function getWeatherData(input) {
+    const body = JSON.stringify({ zip: input })
+    console.log("This is the body:", body)
+    fetch(weatherAPI, {
+      method: 'POST',
+      mode: "no-cors",
+      headers: {
+        // 'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: {
-        zip: input,
-      },
+      body: body,
     })
       .then((response) => response.json())
-      .then((response) => response.body); // we may have to access a part of the response object
+      .then((response) => console.log(repsonse));
   }
 
   // could try doing an onSubmit instead
   return (
-    <div className="box has-background-danger">
+    <div className="column">
       <div>
         <input type="text" placeholder="zipcode" onChange={(e) => setLocation(e.target.value)} />
         <button onClick={() => setClicked(!clicked)}>Update Location</button>

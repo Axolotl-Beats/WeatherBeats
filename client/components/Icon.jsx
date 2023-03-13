@@ -8,8 +8,9 @@ export default function Icon() {
   // we should save the different images in local
 
   return (
-    <div>
-      <img src={url} />
-    </div>
+    <div>test icon</div>
+        // <div class='column'>
+        //   <img src={} /><img>
+        // </div>
   );
 }

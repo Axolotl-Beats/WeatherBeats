@@ -5,7 +5,7 @@ export default function UserBox ()  {
   const username = useSelector((state) => state.updater.username)
 
   return(
-    <div>
+    <div class='column'>
       Welcome {username}!
       <button>Log Out</button>
     </div>

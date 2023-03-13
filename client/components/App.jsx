@@ -7,15 +7,15 @@ import Login from './Login';
 export default function App() {
   const [token, setToken] = useState('');
 
-  useEffect(() => {
-    async function getToken() {
-      const response = await fetch('/auth/token');
-      const json = await response.json();
-      // saves token to state
-      setToken(json.access_token);
-    }
-    getToken();
-  }, []);
+  // useEffect(() => {
+  //   async function getToken() {
+  //     const response = await fetch('/auth/token');
+  //     const json = await response.json();
+  //     // saves token to state
+  //     setToken(json.access_token);
+  //   }
+  //   getToken();
+  // }, []);
 
   // <div>
   // { (token === '') ? <Login /> : <WebPlayback token={token} /> }
@@ -23,10 +23,10 @@ export default function App() {
 
   return (
     <section id='app' class="hero is-fullheight">
-      <Login />
-      {/* <div className="box has-color-danger">
+      {/* <Login /> */}
+
       <Main />
-      </div> */}
+  
     </section>
   );
 }
