@@ -1,27 +1,17 @@
 import React from 'react';
+import Logo from '../../public/Logo.png';
 import { useSelector } from 'react-redux';
 import { updateUrl } from '../redux/stateSlice';
 
 
 export default function Icon() {
-  const url = useSelector((state) => state.updater)
-
   return (
     <div class='column'>
-      <figure class="image">
-        '../assets/resource/Logo.png'
-        <image src={url} alt="Placeholder image"></image>
-      </figure>
+      <div class='box is-fullheight'>
+        <figure class="image">
+          <img src={Logo} alt="Placeholder image"></img>
+        </figure>
+      </div>
     </div>
   )
 }
-
-// 
-//   <div><p>
-//     WeatherBeats Icon
-//   </div>
-// </div>
-
-    // <div class='column'>
-    //   <img src={} /><img>
-    // </div>

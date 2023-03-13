@@ -6,8 +6,8 @@ const initialState = {
   temp: 69,
   zipcode: 10001,
   city: 'New York City',
-  url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80'
-  // bg: url'.client/assets/image/sunny'
+  url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
+  bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg"
 };
 
 const stateSlice = createSlice({
@@ -20,6 +20,10 @@ const stateSlice = createSlice({
       state.zipcode = action.payload.zip;
       state.city = action.payload.city;
       state.url = action.payload.url;
+      state.bg = action.payload.bg;
+    },
+    updateUser: (state, action) =>  {
+      state.userName = action.payload;
     },
     updateType: (state, action) => {
       state.type = action.payload;
@@ -39,6 +43,6 @@ const stateSlice = createSlice({
   }
 });
 
-export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll } =
+export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateUser } =
   stateSlice.actions;
 export default stateSlice.reducer;
