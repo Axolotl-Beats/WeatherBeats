@@ -1,13 +1,12 @@
 const express = require('express');
 const session = require('express-session');
+const path = require('path');
 const authRoutes = require('./routes/authRouter');
 const weatherRouter = require('./routes/weatherRouter');
 
 require('dotenv').config();
 
 const app = express();
-const path = require('path');
-
 const PORT = 3000;
 
 app.use(express.json());
@@ -26,11 +25,6 @@ app.use(session({
 }));
 
 // Todo: get request for weather type
-dotenv.config();
-
-const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
-const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);
 
