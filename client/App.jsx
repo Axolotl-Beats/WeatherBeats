@@ -1,36 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Login from './components/Login';
 import WebPlayback from './components/WebPlayback';
-// using dotenv
-
-// functional coponents only guys
-const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
-const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-
-/*
 
 function App() {
-
-  return (
-    <>
-        { (token === '') ? <Login/> : <WebPlayback token={token} /> }
-    </>
-  );
-}
-
- */
-
-function App() {
-  const [token, setToken] = useState(process.env.SPOTIFY_TOKEN);
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-  // getting the token and then assigning a state
-    async function getToken() {
-      const response = await fetch('/auth/token');
-      const json = await response.json();
-      setToken(json.access_token);
-    }
-    setToken(process.env.SPOTIFY_TOKEN);
-    // getToken();
+    const fetchToken = async () => {
+      try {
+        const response = await fetch('/auth/token');
+        const data = await response.json();
+        const { accessToken } = data;
+        setToken(accessToken);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchToken();
   }, []);
 
   return (

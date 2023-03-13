@@ -1,61 +1,122 @@
 const express = require('express');
-// const dotenv = require('dotenv');
+const session = require('express-session');
+const axios = require('axios');
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+// creating a session instance
+app.use(session({
+  // secret is in .env file
+  secret: process.env.SESSION_SECRET || 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+    secure: false,
+  },
+}));
+
 // Todo: get request for weather type
-// dotenv.config();
 
-const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
-const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
+const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
+const spotifyCallbackUrl = 'http://localhost:3000/auth/callback';
 
-app.get('/auth/login', (req, res) => {
-  // res.sendStatus(201);
-  const generateRandomString = function (length) {
-    let text = '';
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < length; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
-  };
-
-  const scope = 'streaming user-read-email user-read-private';
-  const state = generateRandomString(16);
-  const authQueryParameters = new URLSearchParams({
-    response_type: 'code',
-    client_id: spotify_client_id,
-    scope,
-    redirect_uri: 'http://localhost:3000/auth/callback',
-    state,
-  });
-    res.redirect('https://accounts.spotify.com/authorize/?' + authQueryParameters.toString());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http//localhost:8080');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
-app.get('/auth/callback', (req, res) => {
+app.get('/', (req, res) => res.send('Hello World'));
 
-  // const code = req.query.code;
-  // const authOptions = {
-  //   url: 'https://accounts.spotify.com/api/token',
-  //   form: {
-  //   code,
-  //   redirect_uri: "http://localhost:3000/auth/callback",
-  //   grant_type: 'authorization_code'
-  // },
-  //   headers: {
-  //     'Authorization': 'Basic ' + (Buffer.from(spotify_client_id + ':' + spotify_client_secret).toString('base64')),
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  // },
-  //     json: true;
-  //   };
-  
-  //   request.post(authOptions, function(error, response, body) {
-  //     if (!error && response.statusCode === 200) {
-  //       const access_token = body.access_token;
-  //       res.redirect('/');
-  //     }
-  //   });
+app.get('/auth/login', (req, res) => {
+  const authUrl = 'https://accounts.spotify.com/authorize';
+  const params = {
+    client_id: spotifyClientId,
+    response_type: 'code',
+    redirect_uri: spotifyCallbackUrl,
+    scope: 'user-read-email user-read-private web-playback',
+  };
+  const urlSearchParams = new URLSearchParams(params);
+  res.redirect(`${authUrl}?${urlSearchParams.toString()}`);
+});
+
+app.get('/auth/callback', async (req, res) => {
+  const tokenUrl = 'https://accounts.spotify.com/api/token';
+  const authString = `${spotifyClientId}:${spotifyClientSecret}`;
+  const authHeader = `Basic ${Buffer.from(authString).toString('base64')}`;
+  const body = new URLSearchParams({
+    grant_type: 'authorization_code',
+    code: req.query.code,
+    redirect_uri: spotifyCallbackUrl,
   });
+
+  try {
+    // initial post request to get access token
+    const response = await axios.post(tokenUrl, body.toString(), {
+      headers: {
+        Authorization: authHeader,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+    // if it works, token is in response.data.access_token
+    const { data } = response;
+    // stick it in an express session
+    res.session.accessToken = data.access_token;
+
+    // example fetching data from spotify using axios
+    const userUrl = 'https://api.spotify.com/v1/me';
+    // using axios to make get request for user data.
+    // this time we use bearer token which make use of the oauth token
+    const userResponse = await axios.get(userUrl, {
+      headers: {
+        Authorization: `Bearer ${data.access_token}`,
+      },
+    });
+
+    const userData = userResponse.data;
+    console.log(userData);
+
+    res.redirect('http://localhost:8080');
+  } catch (error) {
+    // sends back to login if request failed
+    console.error(error);
+    res.redirect('/login');
+  }
+});
+
+// route to refresh token
+app.get('/auth/refreshToken', async (req, res) => {
+  const refreshToken = req.query.refresh_token;
+  const data = new URLSearchParams({
+    grant_type: 'refresh_token',
+    refresh_token: refreshToken,
+  });
+
+  try {
+    const response = await axios.post('https://accounts.spotify.com/api/token', data, {
+      headers: {
+        Authorization: `Basic ${Buffer.from(`${spotifyClientId}:${spotifyClientSecret}`).toString('base64')}`,
+      },
+    });
+    const accessToken = response.data.access_token;
+    res.session.accessToken = accessToken;
+    return res.json({
+      access_token: accessToken,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(400).send('Error refreshing access token');
+  }
+});
+
+// important for backend to grab token which i stored in sessions
+app.get('/auth/token', (req, res) => (
+  res.json({ accessToken: req.session.accessToken })
+));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
