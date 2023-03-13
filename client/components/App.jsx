@@ -8,8 +8,6 @@ export default function App() {
   const [token, setToken] = useState('');
   const bg = useSelector((state) => state.updater.bg);
 
-
-
   useEffect(() => {
     async function getToken() {
       const response = await fetch('/auth/token');
@@ -20,17 +18,11 @@ export default function App() {
     getToken();
   }, []);
 
-    <div>
-      { (token === '') ? <Login /> : <WebPlayback token={token} /> }
-    </div>;
-
   return (
-    <section id='app' class="hero is-fullheight">
-      {/* <Login /> */}
+    <section id="app" className="hero is-fullheight">
       <Main />
     </section>
   );
 }
 
-
-//{backgroundImage: `url(${bg})`}
+// {backgroundImage: `url(${bg})`}

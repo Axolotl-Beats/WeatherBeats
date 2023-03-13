@@ -35,10 +35,6 @@ export default function Zipcode() {
 
   // on button click, fire reducers to update state and re-render page with new location
 
-  }, [])
-
-  //on button click, fire reducers to update state and re-render page with new location
-
   function getNewWeatherData(input) {
     const body = JSON.stringify({ zip: input });
     console.log('This is the body:', body);
@@ -52,39 +48,33 @@ export default function Zipcode() {
       .then((response) => response.json())
       .then((response) => dispatch(updateAll(response)))
       .then((response) => console.log('This is the reponse after UpdateAll', response));
-      .then((response) => response.json())
-      .then((response) => dispatch(updateAll(response)))
-      .then((response) => console.log('This is the reponse after UpdateAll', response))
   }
 
   const { temp, city, type } = useSelector((state) => state.updater);
 
   return (
     <div className="column">
-      <div class='box is-align-content-center is-justify-content-center'>
-        <div class='card-content'>
-          <span>
-
-
-          </span>
+      <div className="box is-align-content-center is-justify-content-center">
+        <div className="card-content">
+          <span />
         </div>
 
-        <div class="field has-addons">
-          <div class="control has-icons-left has-icons-right is-expanded">
-   
-            <input class='input has-text-weight-bold is-size-4' type="text" placeholder="ZIPCODE" onChange={(e) => setLocation(e.target.value)} />
+        <div className="field has-addons">
+          <div className="control has-icons-left has-icons-right is-expanded">
+
+            <input className="input has-text-weight-bold is-size-4" type="text" placeholder="ZIPCODE" onChange={(e) => setLocation(e.target.value)} />
 
           </div>
-          <p class="control">
- 
-            <a class='button is-primary has-text-weight-bold is-size-4 has-text-light' onClick={() => getNewWeatherData(location)}>Location</a>
+          <p className="control">
+
+            <a className="button is-primary has-text-weight-bold is-size-4 has-text-light" onClick={() => getNewWeatherData(location)}>Location</a>
           </p>
         </div>
 
-        <footer class="card-footer">
-          <p class="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{type}</p>
-          <p class="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{city}</p>
-          <p class="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{temp}</p>
+        <footer className="card-footer">
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{type}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{city}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{temp}</p>
         </footer>
 
       </div>

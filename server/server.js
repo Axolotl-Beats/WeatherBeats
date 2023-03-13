@@ -28,7 +28,7 @@ app.use(session({
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);
 
-app.get('/api/user', async (req, res, next) => {
+app.get('/api/user', async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ error: 'User not logged in' });
   }

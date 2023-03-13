@@ -7,7 +7,8 @@ const initialState = {
   zipcode: 10001,
   city: 'New York City',
   url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
-  bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg"
+  bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg",
+  playlist: '4ANPW38qMEYQ3Z1mVLrtmm',
 };
 
 const stateSlice = createSlice({
@@ -21,6 +22,9 @@ const stateSlice = createSlice({
       state.city = action.payload.city;
       state.url = action.payload.url;
       state.bg = action.payload.bg;
+    },
+    updatePlaylist: (state, action) =>  {
+      state.playlist = action.payload;
     },
     updateUser: (state, action) =>  {
       state.userName = action.payload;
@@ -43,6 +47,6 @@ const stateSlice = createSlice({
   }
 });
 
-export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateUser } =
+export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateUser, updatePlaylist } =
   stateSlice.actions;
 export default stateSlice.reducer;
