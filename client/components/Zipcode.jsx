@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateZipcode } from './redux/stateSlice';
+import { updateZipcode } from '../redux/stateSlice';
 
 // send fetch request to get weather from API based upon Zip Code
 

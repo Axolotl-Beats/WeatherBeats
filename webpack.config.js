@@ -5,14 +5,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-  entry: './client/index.jsx',
+  entry: './client/index.js',
   // Default to development
   mode: process.env.NODE_ENV || 'development',
   output: {
     // output production to /dist (change if you want)
     path: `${__dirname}/dist`,
     publicPath: '/',
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -22,56 +22,56 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-          },
-        },
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
       },
       {
         test: /\.s(a|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: 'css-loader'
           },
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: true,
+              sourceMap: true
               // options...
-            },
-          },
-        ],
+            }
+          }
+        ]
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif|webp)$/i,
-        type: 'asset/resource',
-      },
-    ],
+        type: 'asset/resource'
+      }
+    ]
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()],
+    minimizer: [new TerserPlugin()]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx']
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './public', 'index.html'),
       fileName: './index.html',
-      inject: true,
+      inject: true
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css/mystyles.css',
+      filename: '[name].css/mystyles.css'
     }),
     new Dotenv({
       path: path.resolve(__dirname, './.env'),
-      safe: true,
-    }),
+      safe: true
+    })
   ],
   devServer: {
     // for routing
@@ -82,16 +82,16 @@ module.exports = {
     // static files
     static: {
       directory: path.join(__dirname, 'public'),
-      publicPath: '/',
+      publicPath: '/'
     },
     compress: true,
     // opens window when changes happen (can be annoying beware)
     // open: true,
-    port: 8080,
+    port: 8080
     // proxy: {
     //   '/api': {
     //     target: 'http://127.0.0.1:3000',
     //   },
     // },
-  },
+  }
 };
