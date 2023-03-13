@@ -1,8 +1,7 @@
+const path = require('path');
 const weatherController = {};
 
-const API_KEY = 'dead5c9b084e896a899ac3479c1d786c'
-
-
+const API_KEY = 'dead5c9b084e896a899ac3479c1d786c';
 
 weatherController.getData = async (req,res,next) => {
   console.log('Inside get weather middleware')
@@ -21,8 +20,18 @@ weatherController.getData = async (req,res,next) => {
     zip,
     city: apiResponse.name,
     iconUrl: `https://openweathermap.org/img/wn/${apiResponse.weather[0].icon}@2x.png`,
+    bg: '',
   };
 //   console.log(apiResponse)
+  if (responseObj.type === 'sunny') {
+    responseObj.bg = path.resolve(__dirname, '../client/asset/')
+  };
+  if (responseObj.type === 'rain') {
+    responseObj.bg = path.resolve(__dirname, '../client/asset')
+  };
+  if (responseObj.type === 'windy') {
+    responseObj.bg = path.resolve(__dirname,'../client/asset')
+  };
   res.locals.response = responseObj;
   return next();
 };
