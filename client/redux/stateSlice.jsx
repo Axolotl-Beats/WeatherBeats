@@ -14,6 +14,13 @@ const stateSlice = createSlice({
   name: 'updater',
   initialState,
   reducers: {
+    updateAll: (state, action) => {
+      state.type = action.payload.type;
+      state.temp = action.payload.temp;
+      state.zipcode = action.payload.zip;
+      state.city = action.payload.city;
+      state.url = action.payload.url;
+    },
     updateType: (state, action) => {
       state.type = action.payload;
     },
@@ -32,6 +39,6 @@ const stateSlice = createSlice({
   }
 });
 
-export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl } =
+export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll } =
   stateSlice.actions;
 export default stateSlice.reducer;

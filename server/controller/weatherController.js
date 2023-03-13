@@ -31,6 +31,7 @@ weatherController.getData = async (req, res, next) => {
     responseObj.bg = path.resolve(__dirname, '../client/asset')
   };
   res.locals.response = responseObj;
+  console.log("This is res.locals: ", res.locals.response)
   return next();
 };
 
