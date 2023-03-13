@@ -18,7 +18,7 @@ authRouter.get('/login', (req, res) => {
     client_id: spotifyClientId,
     response_type: 'code',
     redirect_uri: spotifyCallbackUrl,
-    scope: 'user-read-email user-read-private streaming user-read-recently-played',
+    scope: 'user-read-email user-read-private streaming playlist-read-private playlist-read-collaborative',
   };
   const urlSearchParams = new URLSearchParams(params);
   res.redirect(`${authUrl}?${urlSearchParams.toString()}`);

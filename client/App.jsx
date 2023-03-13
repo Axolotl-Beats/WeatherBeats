@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Login from './components/Login';
 // import WebPlayback from './components/WebPlayback';
-import Player from './components/PlayerTest';
+import Player from './components/Player';
+// import Player from './components/IFramePlayer';
 
 function App() {
   const [token, setToken] = useState('');
@@ -17,7 +18,7 @@ function App() {
         const response = await fetch('/auth/token');
         const data = await response.json();
         const { accessToken } = data;
-        setToken(accessToken);
+        setToken(accessToken.trim());
       } catch (error) {
         console.error('Token fetch error: ', error);
       }
@@ -49,7 +50,7 @@ function App() {
       </h1>
       <p>{JSON.stringify(userData)}</p>
       {/* example track uri passed as a prop. will hard code it in backend later */}
-      { (!token) ? <Login /> : <Player token={token} /> }
+      { (!token) ? <Login /> : <Player accessToken={token} trackUri="spotify:track:7w87IxuO7BDcJ3YUqCyMTT" /> }
 
     </div>
   );
