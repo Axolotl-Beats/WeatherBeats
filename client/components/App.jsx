@@ -10,19 +10,19 @@ export default function App() {
 
 
 
-  // useEffect(() => {
-  //   async function getToken() {
-  //     const response = await fetch('/auth/token');
-  //     const json = await response.json();
-  //     // saves token to state
-  //     setToken(json.access_token);
-  //   }
-  //   getToken();
-  // }, []);
+  useEffect(() => {
+    async function getToken() {
+      const response = await fetch('/auth/token');
+      const json = await response.json();
+      // saves token to state
+      setToken(json.access_token);
+    }
+    getToken();
+  }, []);
 
-  // <div>
-  // { (token === '') ? <Login /> : <WebPlayback token={token} /> }
-  // </div>
+    <div>
+      { (token === '') ? <Login /> : <WebPlayback token={token} /> }
+    </div>;
 
   return (
     <section id='app' class="hero is-fullheight">

@@ -1,45 +1,74 @@
-import React from 'react';
-import Zipcode from './Zipcode.jsx';
-import UserBox from './UserBox.jsx';
-import Icon from './Icon.jsx';
-// import Logo from '../Assets/Logo.png'
+import React, { useState, useEffect } from 'react';
+import Zipcode from './Zipcode';
+import UserBox from './UserBox';
+import Icon from './Icon';
+import Logo from '../../public/logo.png';
+import Player from './Player';
+import Login from './Login';
 
 export default function Main() {
+  const [token, setToken] = useState('');
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    // right now the token just fetches from the server sessions
+    // TODO: have the token refresh if it is expired (include timestamp in session)
+    // TODO: for some reason, fetching the token just give an empty object. working on this later
+    const fetchToken = async () => {
+      try {
+        const response = await fetch('/auth/token');
+        const data = await response.json();
+        const { accessToken } = data;
+        setToken(accessToken.trim());
+      } catch (error) {
+        console.error('Token fetch error: ', error);
+      }
+    };
+    console.log('Current token ', token);
+
+    // fetch userdata
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch('/api/user');
+        const data = await response.json();
+        setUserData(data);
+      } catch (error) {
+        console.error('User data fetch error: ', error);
+      }
+    };
+    fetchToken();
+    fetchUserData();
+  }, [token]);
 
   return (
     <>
-      <div class="hero-head">
-        <div class='columns'>
+      <div className="hero-head">
+        <div className="columns">
           <Icon />
           <Zipcode />
           <UserBox />
         </div>
       </div>
 
-      <div class="hero-body">
-        <div class="container has-text-centered">
-         
-            <div id='player' class="card">
-              <div class="card-content">
-                <div class="content">
-                  <div class="field">
-                    <a class="button is-large is-success is-fullwidth" href='https://open.spotify.com/?'>
-                      SPOTIFY PLAYER
-                    </a>
-                  </div>
+      <div className="hero-body">
+        <div className="container has-text-centered">
+
+          <div id="player" className="card">
+            <div className="card-content">
+              <div className="content">
+                <div className="field">
+                  { (!token) ? <Login user={userData} /> : <Player token={token} /> }
                 </div>
               </div>
             </div>
-
+          </div>
         </div>
       </div>
-
-      <div class="hero-foot">
-      </div>
+      <div className="hero-foot" />
     </>
-  )
-};
+  );
+}
 
-//On page render, we will have access to a JSON object from Spotify
-//On page load, we can send a Post request to our Database with the username of the persom
-//On Zip Code Use Effect Fire,
+// On page render, we will have access to a JSON object from Spotify
+// On page load, we can send a Post request to our Database with the username of the persom
+// On Zip Code Use Effect Fire

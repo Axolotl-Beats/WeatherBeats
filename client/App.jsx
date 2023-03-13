@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Login from './components/Login';
-// import WebPlayback from './components/WebPlayback';
 import Player from './components/Player';
-// import Player from './components/IFramePlayer';
+// import Main from './components/Main';
 
 function App() {
   const [token, setToken] = useState('');
@@ -41,17 +40,17 @@ function App() {
   }, [token]);
 
   // ive put examples of using this funcitonality in teh body
+  // <h1>
+  //   my token:
+  //   {token}
+  //   {' '}
+  // </h1>
+  // <p>{JSON.stringify(userData)}</p>
+  // {/* example track uri passed as a prop. will hard code it in backend later */}
+  // { (!token) ? <Login /> : <Player accessToken={token} trackUri="spotify:track:7w87IxuO7BDcJ3YUqCyMTT" /> }
   return (
     <div>
-      <h1>
-        my token:
-        {token}
-        {' '}
-      </h1>
-      <p>{JSON.stringify(userData)}</p>
-      {/* example track uri passed as a prop. will hard code it in backend later */}
-      { (!token) ? <Login /> : <Player accessToken={token} trackUri="spotify:track:7w87IxuO7BDcJ3YUqCyMTT" /> }
-
+      <Main />
     </div>
   );
 }

@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unknown-property */
 import React from 'react';
-import Logo from '../../public/Logo.png';
+import Logo from '../../public/logo.png';
 
-export default function Login() {
+export default function Login(props) {
+  console.log('Login', props);
   return (
     <div class="hero-body">
       <div class="container">
@@ -20,11 +21,10 @@ export default function Login() {
               <div class="card-content">
                 <div class="content">
                   <div class="field">
-                    <a class="button is-large is-success is-fullwidth" href="https://open.spotify.com/?">
+                    <a class="button is-large is-success is-fullwidth" href="/auth/login">
                       Login
                     </a>
                   </div>
-
 
                   <div class="field">
                     <label class="label has-text-centered has-text-white">Forgot Password?</label>
