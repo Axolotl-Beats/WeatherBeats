@@ -1,2 +1,25 @@
 @charset "utf-8";
 @import "node_modules/bulma/bulma.sass";
+
+html {
+  background-image: url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80');
+  background-size: cover;
+  // background-size: 100vw;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.topGrid  {
+  display: grid;
+  flex-direction: row;
+}
+
+.infoBar  {
+  display: grid;
+  flex-direction: row;
+}
+
+.box { /* From https://css.glass */
+  background-color: rgba(255, 255, 255, 0.5);
+ }

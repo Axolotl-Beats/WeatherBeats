@@ -1,8 +1,8 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  type: 'Regina',
+  userName: 'Regina',
+  type: 'Rainy',
   temp: 69,
   zipcode: 10001,
   city: 'New York City',

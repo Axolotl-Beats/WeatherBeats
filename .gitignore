@@ -1,8 +1,8 @@
 .env
 node_modules/
 build
+.DS_Store
 pnpm-lock.yaml
 dist/
 notes/
 public/
-

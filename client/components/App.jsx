@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import WebPlayback from './components/WebPlayback';
-import Login from './components/Login';
+import Main from './Main.jsx';
+import { useSelector } from 'react-redux';
+import { Link, Switch, Route, Router } from 'react-router-dom';
+
+
+
+import WebPlayback from './WebPlayback';
+import Login from './Login';
 // using dotenv
 
-// functional coponents only guys
+export default function App() {
 const spotify_client_id = process.env.SPOTIFY_CLIENT_ID;
 const spotify_client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
@@ -25,9 +31,13 @@ function App() {
   // if token is empty, render login, else render web playback compennt
   return (
     <div>
-      <h1>Hello World</h1>
-    </div>
-  );
-}
+      {/* <section>
+        <Login></Login>
+      </section> */}
+      <div className="box has-color-danger">
+        <Main></Main>
+      </div>
 
-export default App;
+    </div>
+  )
+}
