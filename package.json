@@ -4,8 +4,9 @@
   "description": "Currated Spotify playlist based on your current location's weather",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --mode production",
     "dev": "webpack-dev-server",
-    "serve": "node server/server.js"
+    "serve": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -25,16 +26,23 @@
   },
   "homepage": "https://github.com/Axolotl-Beats/WeatherBeats#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "axios": "^1.3.4",
     "dotenv": "^16.0.3",
+    "dotenv-webpack": "^8.0.1",
+    "express": "^4.18.2",
     "mongoose": "^7.0.1",
     "nodemon": "^2.0.21",
+    "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
+    "react-spotify-embed": "^2.0.3",
+    "react-spotify-web-playback": "^0.13.2",
+    "react-use": "^17.4.0",
     "redux": "^4.2.1",
-    "express": "^4.18.2"
-
+    "request": "^2.88.2",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.21.0",
@@ -56,7 +64,7 @@
     "sass-loader": "^13.2.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.7",
-    "webpack": "^5.76.0",
+    "webpack": "^5.76.1",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   }

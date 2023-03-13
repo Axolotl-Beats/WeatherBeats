@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: './client/index.jsx',
@@ -27,7 +28,19 @@ module.exports = {
       },
       {
         test: /\.s(a|c)ss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              // options...
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -53,8 +66,11 @@ module.exports = {
       inject: true,
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: '[name].css/mystyles.css',
+    }),
+    new Dotenv({
+      path: path.resolve(__dirname, './.env'),
+      safe: true,
     }),
   ],
   devServer: {
