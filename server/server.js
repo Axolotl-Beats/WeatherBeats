@@ -1,9 +1,11 @@
 const express = require('express');
 const session = require('express-session');
+const dotenv = require('dotenv')
 const authRoutes = require('./routes/authRouter');
-const weatherRouter = require('./routes/weatherRouter');
+const weatherRouter = require('./routes/weather');
+const userController = require('../database/controller')
 
-require('dotenv').config();
+dotenv.config();
 
 const app = express();
 const path = require('path');
@@ -46,6 +48,14 @@ app.get('/api/user', async (req, res, next) => {
   };
   return res.status(200).json(data);
 });
+
+app.post('/db/addUser', userController.addUser, (req, res)=> {
+  res.status(200).json(res.locals.data);
+});
+
+app.get('/db/getUser', userController.getUser, (req,res)=> {
+  res.status(200).json(res.locals.email)
+})
 
 // added catch
 app.use('*', (req, res) => res.sendStatus(404));
