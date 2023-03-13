@@ -68,10 +68,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css/mystyles.css',
     }),
-    new Dotenv({
-      path: path.resolve(__dirname, './.env'),
-      safe: true,
-    }),
   ],
   devServer: {
     // for routing

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Login from './components/Login';
-import WebPlayback from './components/WebPlayback';
+import Player from './components/PlayerTest';
 
 function App() {
   const [token, setToken] = useState('');
@@ -22,8 +22,11 @@ function App() {
 
   return (
     <div>
-      <h1>Hello World</h1>
-      { (token === '') ? <Login /> : <WebPlayback token={token} /> }
+      <h1>
+        my token:
+        {token}
+      </h1>
+      { (!token) ? <Login /> : <Player token={token} trackUri="spotify:track:6rqhFgbbKwnb9MLmUQDhG6" /> }
 
     </div>
   );
