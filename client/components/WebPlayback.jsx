@@ -16,9 +16,9 @@ const track = {
 function WebPlayback({ token }) {
   const playerRef = useRef(null);
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: 'http://localhost:3000',
     clientId: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: 'http://localhost:3000/auth/callback',
   });
 
   const [currentTrack, setTrack] = useState(track);
