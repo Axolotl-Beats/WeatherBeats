@@ -12,7 +12,7 @@ weatherController.getData = async (req,res,next) => {
   const WEATHER_URL_ZIP = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${API_KEY}&units=${metric}`;
   const weatherReq = await fetch(WEATHER_URL_ZIP);
   const apiResponse = await weatherReq.json();
-  console.log('apiResponsee', apiResponse)
+  //console.log('apiResponsee', apiResponse)
   const responseObj = {
     type: apiResponse.weather[0].main.toLowerCase(),
     temp: apiResponse.main.temp,
