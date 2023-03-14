@@ -16,8 +16,8 @@ Weather API Source:  <https://openweathermap.org/api>
 
 
 ## Bulma
-[Documentation](https://bulma.io/documentation/)
-[Setup with webpack](https://bulma.io/documentation/customize/with-webpack/) Be aware that there will be minor differences in documentation and our webpack due to how we structured our folder directory.
+- [Documentation](https://bulma.io/documentation/)
+- [Setup with webpack](https://bulma.io/documentation/customize/with-webpack/) Be aware that there will be minor differences in documentation and our webpack due to how we structured our folder directory.
 
 ## Fonts
 
