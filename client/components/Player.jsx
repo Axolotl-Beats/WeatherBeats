@@ -1,11 +1,10 @@
 import React from 'react';
 
-function Player({ token, playlistUri }) {
-  console.log('player uri', playlistUri)
+function Player({ playlistUri }) {
 
   return (
     <iframe
-      src={`https://open.spotify.com/embed/playlist/${playlistUri['rainy']}?access_token=${token}&autoplay=true`}
+      src={`https://open.spotify.com/embed/playlist/${playlistUri['rainy']}`}
       title="Spotify Player"
       width="300"
       height="380"
@@ -15,5 +14,4 @@ function Player({ token, playlistUri }) {
   );
 }
 
-// https://open.spotify.com/playlist/37i9dQZF1DX889U0CL85jj?si=491b69f1290a4f93
 export default Player;

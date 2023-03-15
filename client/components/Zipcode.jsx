@@ -12,28 +12,11 @@ import Axios from 'axios'
 export default function Zipcode() {
   const dispatch = useDispatch();
   const [location, setLocation] = useState(10001);
-  const weatherType = useSelector((state) => state.updater.weatherObj);
+  const weatherObj = useSelector((state) => state.updater.weatherObj);
 
-  useEffect(() => {
-    // on-load, fetch weather data from the weather API
-    async function getWeatherData(input) {
-      const body = JSON.stringify({ zip: input });
-      console.log('This is the body:', body);
-      const response = await fetch('/weather', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-      });
-      const newData = await response.json();
-      console.log('This is body data', newData);
-      return newData;
-    }
-
-    // invoke the function
-    const data = getWeatherData(location);
-  }, []);
+  console.log('weatherobject', weatherObj)
+  // useEffect(() => {
+  // }, []);
 
   // on button click, fire reducers to update state and re-render page with new location
 
@@ -43,16 +26,11 @@ export default function Zipcode() {
     const weatherObj = await Axios.post('/weather', {
       body
     })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-    console.log(weatherObj);
+    console.log('weather', weatherObj.data);
+    dispatch(updateWeatherObj(weatherObj.data))
   }
 
-  const { temp, city, type } = useSelector((state) => state.updater);
+  //const { temp, city, type } = useSelector((state) => state.updater.weatherObj);
 
   return (
     <div className="column">
@@ -69,14 +47,14 @@ export default function Zipcode() {
           </div>
           <p className="control">
 
-            <a className="button is-primary has-text-weight-bold is-size-4 has-text-light" onClick={() => getNewWeatherData(location)}>Location</a>
+            <a className="button is-primary has-text-weight-bold is-size-4 has-text-light" onClick={()=>getNewWeatherData(location)}>Location</a>
           </p>
         </div>
 
         <footer className="card-footer">
-          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{type}</p>
-          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{city}</p>
-          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{temp}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{weatherObj.city}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{weatherObj.type}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{weatherObj.temp}</p>
         </footer>
 
       </div>
