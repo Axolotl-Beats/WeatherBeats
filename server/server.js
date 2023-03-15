@@ -33,6 +33,10 @@ app.use(session({
   },
 }));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);

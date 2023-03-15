@@ -16,8 +16,9 @@ const initialState = {
   bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg",
   playlist: playlistOptions,
   authenticated: false,
+  weatherDataObj: {},
   profile: {},
-  LSContainer: 'login'
+  LSContainer: 'login',
 };
 
 const stateSlice = createSlice({
@@ -56,6 +57,9 @@ const stateSlice = createSlice({
     updateAuthenticated: (state, action) => {
       state.authenticated = action.payload;
     },
+    updateWeatherObj: (state, action) => {
+      state.weatherObj = action.payload;
+    },
     updateProfile: (state, action) => {
       state.profile = action.payload;
     },
@@ -64,6 +68,7 @@ const stateSlice = createSlice({
     }
   }
 });
+
 
 export const { updateType,
   updateTemp,
@@ -75,7 +80,8 @@ export const { updateType,
   updatePlaylist,
   updateAuthenticated,
   updateProfile,
-  updateLSContainer
+  updateLSContainer,
+  updateWeatherObj
 } =
   stateSlice.actions;
 export default stateSlice.reducer;
