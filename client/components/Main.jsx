@@ -80,8 +80,7 @@ export default function Main() {
             <div className="card-content">
               <div className="content">
                 <div className="field">
-                  { (!token) ? <Login /> : <Player token={token} playlistUri={playlist} /> }
-                  {/* { (!token) ? <Login /> : <Player token={token} playlistUri="37i9dQZF1EIfv2exTKzl3M" /> } */}
+                  <Player token={token} playlistUri={playlist} />
                 </div>
               </div>
             </div>

@@ -9,6 +9,13 @@ require('dotenv').config();
 const app = express();
 const PORT = 3000;
 
+app.use('/api/verifyuser', (req, res)=>{
+  res.status(200).json(true);
+});
+
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 // creating a session instance
 app.use(session({
   // secret is in .env file
