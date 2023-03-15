@@ -13,6 +13,10 @@ app.use('/api/verifyuser', (req, res)=>{
   res.status(200).json(true);
 });
 
+app.use('/api/getuserdetails', (req, res)=>{
+  res.status(200).json({name: "kitty-snake", email: "kitty-meow-hiss@gmail.com", profilePic: "https://e7.pngegg.com/pngimages/918/791/png-clipart-ragnarok-online-poring-monster-ragnarok-illustration-poring-ragnarok-online-mammal-vertebrate-thumbnail.png"});
+});
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

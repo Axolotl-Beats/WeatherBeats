@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const playlistOptions = {
+  "sunny" : '3tN3977yc2VTPFyyARQlAu',
+  "cloudy" : "37i9dQZF1DX177vQ7mVRmP",
+  "rainy" : "37i9dQZF1DWYuGZUE4XQXm",
+  }
+
 const initialState = {
   userName: 'Regina',
   type: 'Rainy',
@@ -8,9 +14,11 @@ const initialState = {
   city: 'New York City',
   url: 'https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
   bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg",
-  playlist: '4ANPW38qMEYQ3Z1mVLrtmm',
+  playlist: playlistOptions,
   authenticated: false,
   weatherDataObj: {},
+  profile: {},
+  LSContainer: 'login',
 };
 
 const stateSlice = createSlice({
@@ -51,10 +59,29 @@ const stateSlice = createSlice({
     },
     updateWeatherObj: (state, action) => {
       state.weatherObj = action.payload;
+    },
+    updateProfile: (state, action) => {
+      state.profile = action.payload;
+    },
+    updateLSContainer: (state, action) => {
+      state.LSContainer = action.payload;
     }
   }
 });
 
-export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateUser, updatePlaylist, updateAuthenticated, updateWeatherObj } =
+
+export const { updateType,
+  updateTemp,
+  updateZipcode,
+  updateCity,
+  updateUrl,
+  updateAll,
+  updateUser,
+  updatePlaylist,
+  updateAuthenticated,
+  updateProfile,
+  updateLSContainer,
+  updateWeatherObj
+} =
   stateSlice.actions;
 export default stateSlice.reducer;
