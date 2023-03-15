@@ -16,35 +16,35 @@ export default function Main() {
   const weatherType = useSelector((state) => state.updater.type);
   const playlist = useSelector((state) => state.updater.playlist);
 
-  useEffect(() => {
-    // right now the token just fetches from the server sessions
-    // TODO: have the token refresh if it is expired (include timestamp in session)
-    // TODO: for some reason, fetching the token just give an empty object. working on this later
-    const fetchToken = async () => {
-      try {
-        const response = await fetch('/auth/token');
-        const data = await response.json();
-        const { accessToken } = data;
-        setToken(accessToken.trim());
-      } catch (error) {
-        console.error('Token fetch error: ', error);
-      }
-    };
-    console.log('Current token ', token);
+  // useEffect(() => {
+  //   // right now the token just fetches from the server sessions
+  //   // TODO: have the token refresh if it is expired (include timestamp in session)
+  //   // TODO: for some reason, fetching the token just give an empty object. working on this later
+  //   const fetchToken = async () => {
+  //     try {
+  //       const response = await fetch('/auth/token');
+  //       const data = await response.json();
+  //       const { accessToken } = data;
+  //       setToken(accessToken.trim());
+  //     } catch (error) {
+  //       console.error('Token fetch error: ', error);
+  //     }
+  //   };
+  //   console.log('Current token ', token);
 
-    // fetch userdata
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch('/api/user');
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error('User data fetch error: ', error);
-      }
-    };
-    fetchToken();
-    fetchUserData();
-  }, [token]);
+  //   // fetch userdata
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const response = await fetch('/api/user');
+  //       const data = await response.json();
+  //       setUserData(data);
+  //     } catch (error) {
+  //       console.error('User data fetch error: ', error);
+  //     }
+  //   };
+  //   fetchToken();
+  //   fetchUserData();
+  // }, [token]);
 
   return (
     <>
