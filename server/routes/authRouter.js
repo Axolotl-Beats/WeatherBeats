@@ -8,7 +8,7 @@ dotenv.config();
 
 const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-const spotifyCallbackUrl = 'http://localhost:3000/auth/callback';
+const spotifyCallbackUrl = 'http://localhost:8080/';
 
 authRouter.get('/', (req, res) => res.send('Auth Test'));
 authRouter.get('/login', (req, res) => {

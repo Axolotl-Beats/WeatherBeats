@@ -9,8 +9,6 @@ require('dotenv').config();
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 // creating a session instance
 app.use(session({
   // secret is in .env file
@@ -23,6 +21,10 @@ app.use(session({
     secure: false,
   },
 }));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
