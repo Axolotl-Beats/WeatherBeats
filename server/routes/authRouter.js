@@ -10,6 +10,7 @@ const spotifyClientId = process.env.SPOTIFY_CLIENT_ID;
 const spotifyClientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 const spotifyCallbackUrl = 'http://localhost:8080/';
 //const spotifyCallbackUrl = 'http://www.google.com';
+const PLAYLISTS = "https://api.spotify.com/v1/me/playlists";
 
 
 authRouter.get('/', (req, res) => res.send('Auth Test'));
@@ -111,5 +112,9 @@ authRouter.get('/token', async (req, res) => {
 
   return res.json({ accessToken: req.session.token.accessToken });
 });
+
+authRouter.get('/playlists', async (req, res) => {
+  
+})
 
 module.exports = authRouter;

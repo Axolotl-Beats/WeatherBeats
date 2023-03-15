@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll,
+  updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateWeatherObj
 } from '../redux/stateSlice';
+import Axios from 'axios'
 
 // send fetch request to get weather from API based upon Zip Code
 
@@ -11,13 +12,14 @@ import {
 export default function Zipcode() {
   const dispatch = useDispatch();
   const [location, setLocation] = useState(10001);
+  const weatherType = useSelector((state) => state.updater.weatherObj);
 
   useEffect(() => {
     // on-load, fetch weather data from the weather API
     async function getWeatherData(input) {
       const body = JSON.stringify({ zip: input });
       console.log('This is the body:', body);
-      const response = await fetch('/api/weather', {
+      const response = await fetch('/weather', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,19 +37,19 @@ export default function Zipcode() {
 
   // on button click, fire reducers to update state and re-render page with new location
 
-  function getNewWeatherData(input) {
+  const getNewWeatherData = async (input) => {
     const body = JSON.stringify({ zip: input });
     console.log('This is the body:', body);
-    fetch('/api/weather', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
+    const weatherObj = await Axios.post('/weather', {
+      body
     })
-      .then((response) => response.json())
-      .then((response) => dispatch(updateAll(response)))
-      .then((response) => console.log('This is the reponse after UpdateAll', response));
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+    console.log(weatherObj);
   }
 
   const { temp, city, type } = useSelector((state) => state.updater);
