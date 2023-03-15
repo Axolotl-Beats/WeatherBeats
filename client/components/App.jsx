@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Main from './Main';
-import Login from './Login';
+import LoginSignUpContainer from './LoginSignupContainer';
 // import WebPlayback from './WebPlayback';
 import { Route, Routes, BrowserRouter, Link, Navigate } from 'react-router-dom'
 
@@ -21,8 +21,7 @@ export default function App() {
 
   return (
     <section id="app" className="hero is-fullheight">
-      <div>{authenticated? "TRUE" : "FALSE"}</div>
-        {authenticated? <Main /> : <Login />}
+        {authenticated? <Main /> : <LoginSignUpContainer />}
     </section>
   );
 }

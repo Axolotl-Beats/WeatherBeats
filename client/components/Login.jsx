@@ -3,16 +3,33 @@ import React, { Component, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../../public/logo.png';
 import Axios from 'axios'
-import { updateAuthenticated } from '../redux/stateSlice';
+import { updateAuthenticated, updateLSContainer } from '../redux/stateSlice';
 
 export default function Login() {
+  
+  const [inputUsername, setInputUsername] = useState('');
+  const [inputPassword, setInputPassword] = useState('');
+  
+  const handleChangeUsername = (event) => {
+    setInputUsername(event.target.value);
+    console.log('username', event.target.value)
+  };
+
+  const handleChangePassword = (event) => {
+    setInputPassword(event.target.value);
+    console.log('password', event.target.value)
+  };
+
   const dispatch = useDispatch();
 
-
-
-  const dispatchFunction = async () => {
+  const dispatchFunctionLogin = async () => {
     const result = await Axios.get('/api/verifyuser');
     dispatch(updateAuthenticated(result))
+    console.log('result', result)
+  }
+
+  const dispatchFunctionLSContainer = () => {
+    dispatch(updateLSContainer('signup'))
   }
 
   return (
@@ -29,22 +46,22 @@ export default function Login() {
                     <p class="form__title">User Login</p>
 
                     <div class="form__input-group">
-                        <input name="_username" type="text" class="form__input" autofocus placeholder="Username or email"/>
+                        <input name="username" type="text" class="form__input" autofocus placeholder="Username or email" onChange={handleChangeUsername}/>
                     </div>
 
                     <div class="form__input-group">
-                        <input name="password" type="password" class="form__input" autofocus placeholder="Password"/>
+                        <input name="password" type="password" class="form__input" autofocus placeholder="Password" onChange={handleChangePassword}/>
                         <div class="form__input-error-message"></div>
                     </div>
 
-                    <button class="button is-large is-success is-fullwidth" onClick={dispatchFunction}>Login TEST</button>
+                    <button class="button is-large is-success is-fullwidth" onClick={dispatchFunctionLogin}>Login TEST</button>
 
                   <div class="field">
                     <label class="label has-text-centered has-text-white">Forgot Password?</label>
                   </div>
 
                   <div class="field">
-                    <label class="label has-text-centered has-text-white">Sign Up</label>
+                    <label class="label has-text-centered has-text-white" onClick={dispatchFunctionLSContainer}>Sign Up</label>
                   </div>
                 </div>
               </div>
