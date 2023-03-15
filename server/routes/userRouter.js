@@ -3,7 +3,7 @@ const userController = require('../controller/userController');
 
 const userRouter = express.Router();
 
-userRouter.post('/api/verifyuser', (req, res) => {
+userRouter.post('/', (req, res) => {
   res.status(200).json(true);
 });
 

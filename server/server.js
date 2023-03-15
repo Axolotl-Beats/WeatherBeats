@@ -12,6 +12,15 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use('/api/verifyuser', (req, res) => {
+  res.status(200).json(true);
+});
+
+app.use('/api/getuserdetails', (req, res) => {
+  res.status(200).json({ name: 'kitty-snake', email: 'kittymeowhiss@gmail.com', profilePic: 'https://e7.pngegg.com/pngimages/918/791/png-clipart-ragnarok-online-poring-monster-ragnarok-illustration-poring-ragnarok-online-mammal-vertebrate-thumbnail.png' });
+});
+
 // creating a session instance
 // app.use(session({
 //   // secret is in .env file
@@ -25,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 //   },
 // }));
 
-app.use('/api/verifyuser', userRouter);
+app.use('/api/verifytest', userRouter);
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);

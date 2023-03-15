@@ -10,6 +10,8 @@ const initialState = {
   bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg",
   playlist: '4ANPW38qMEYQ3Z1mVLrtmm',
   authenticated: false,
+  profile: {},
+  LSContainer: 'login'
 };
 
 const stateSlice = createSlice({
@@ -47,10 +49,27 @@ const stateSlice = createSlice({
     },
     updateAuthenticated: (state, action) => {
       state.authenticated = action.payload;
+    },
+    updateProfile: (state, action) => {
+      state.profile = action.payload;
+    },
+    updateLSContainer: (state, action) => {
+      state.LSContainer = action.payload;
     }
   }
 });
 
-export const { updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateUser, updatePlaylist, updateAuthenticated } =
+export const { updateType,
+  updateTemp,
+  updateZipcode,
+  updateCity,
+  updateUrl,
+  updateAll,
+  updateUser,
+  updatePlaylist,
+  updateAuthenticated,
+  updateProfile,
+  updateLSContainer
+} =
   stateSlice.actions;
 export default stateSlice.reducer;

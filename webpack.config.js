@@ -72,6 +72,7 @@ module.exports = {
     // historyApiFallback: true,
     // HMR nodemon for webpack
     hot: true,
+    historyApiFallback: true,
     liveReload: true,
     // static files
     static: {
