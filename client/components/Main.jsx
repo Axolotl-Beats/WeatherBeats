@@ -16,18 +16,6 @@ export default function Main() {
   const weatherType = useSelector((state) => state.updater.type);
   const playlist = useSelector((state) => state.updater.playlist);
 
-  function changePlaylist(type) {
-    if (type === 'clouds') {
-      return dispatch(updatePlaylist('37i9dQZF1EIfv2exTKzl3M'));
-    }
-    if (type === 'clear') {
-      return dispatch(updatePlaylist('6VCXXQSDMXLYaHNaWPx11S'));
-    }
-    if (type === 'rain') {
-      return dispatch(updatePlaylist('4ANPW38qMEYQ3Z1mVLrtmm'));
-    }
-  }
-
   useEffect(() => {
     // right now the token just fetches from the server sessions
     // TODO: have the token refresh if it is expired (include timestamp in session)
@@ -56,11 +44,6 @@ export default function Main() {
     };
     fetchToken();
     fetchUserData();
-
-    // set playlist based on weather type
-    console.log('weather ', weatherType);
-    changePlaylist(weatherType);
-    console.log('changePlaylist', playlist);
   }, [token]);
 
   return (
