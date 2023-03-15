@@ -50,7 +50,7 @@ authRouter.get('/callback', async (req, res, next) => {
       refreshToken: data.refresh_token,
       tokenTimeStamp: Date.now(),
     };
-    console.log(req.session.token);
+    console.log('the req session token',req.session.token);
 
     // example fetching data from spotify using axios
     const userUrl = 'https://api.spotify.com/v1/me';
