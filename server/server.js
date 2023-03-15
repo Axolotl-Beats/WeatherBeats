@@ -3,15 +3,14 @@ const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/authRouter');
 const weatherRouter = require('./routes/weatherRouter');
+const userController = require('../server/controller/userController')
 
 require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
 
-app.use('/api/verifyuser', (req, res)=>{
-  res.status(200).json(true);
-});
+
 
 
 app.use(express.json());
@@ -29,11 +28,14 @@ app.use(session({
   },
 }));
 
+app.use('/api/verifyuser', (req, res)=>{
+  res.status(200).json(true);
+});
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);
 
-app.get('/api/user', async (req, res) => {
+app.get('/api/user', ,async (req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ error: 'User not logged in' });
   }
