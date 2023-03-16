@@ -3,7 +3,7 @@ import React, { Component, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../../public/logo.png';
 import Axios from 'axios'
-import { updateAuthenticated, updateLSContainer } from '../redux/stateSlice';
+import { updateAuthenticated, updateLSContainer, updateUser } from '../redux/stateSlice';
 
 export default function Login() {
   
@@ -28,12 +28,13 @@ export default function Login() {
     //this code below is just forming it such that the inputs are transmitted to the endpoint,
     //but it is not yet connected properly to the backend
     
-    //const result = await Axios.get(`/api/verifyuser?username=${inputUsername}&password=${inputPassword}`)
-    //console.log(result)
+    const result = await Axios.get(`/api/verifyuser?username=${inputUsername}&password=${inputPassword}`)
+    console.log(result)
 
-    //dispatch(updateAuthenticated(result.data))
-    dispatch(updateAuthenticated(true))
-    console.log('result', result.data)
+    dispatch(updateAuthenticated(result.data));
+    if (result.data){
+      dispatch(updateUser(inputUsername));
+    }
   }
 
   const dispatchFunctionLSContainer = () => {
@@ -62,7 +63,7 @@ export default function Login() {
                         <div class="form__input-error-message"></div>
                     </div>
 
-                    <button class="button is-large is-success is-fullwidth" onClick={dispatchFunctionLogin}>Login TEST</button>
+                    <button class="button is-large is-success is-fullwidth" onClick={dispatchFunctionLogin}>Login</button>
 
                   <div class="field">
                     <label class="label has-text-centered has-text-white">Forgot Password?</label>

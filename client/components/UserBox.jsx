@@ -9,7 +9,7 @@ export default function UserBox() {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.updater.profile);
   const authenticated = useSelector((state) => state.updater.authenticated);
-  const username = useSelector((state) => state.updater.username);
+  const username = useSelector((state) => state.updater.userName);
 
   console.log('authenticated', authenticated)
 
@@ -18,15 +18,14 @@ export default function UserBox() {
     //const result = await Axios.get('/api/getuserdetails');
     //simulating the result in a real scenario
     //THIS IS NOT A SECURE WAY OF DOING IT
-    //const result = await Axios.get(`/api/getuserdetails?username=${username}`);
-
+    const result = await Axios.get(`/api/getuserdetails?username=${username}`);
+    console.log('result userbox', result)
     //dummy input to make sure it works
-    const tmpResult = {name: "kitty-snake",
-      email: "kitty-meow-hiss@gmail.com",
-      profilePic: "https://e7.pngegg.com/pngimages/918/791/png-clipart-ragnarok-online-poring-monster-ragnarok-illustration-poring-ragnarok-online-mammal-vertebrate-thumbnail.png"
-    }
+    const userBoxInputs = {name: result.data.username,
+      email: result.data.email,
+      profilePic: result.data.profileimage}
     
-    dispatch(updateProfile(tmpResult))
+    dispatch(updateProfile(userBoxInputs))
   }
 
   const dispatchLogout = () => {
@@ -46,9 +45,7 @@ export default function UserBox() {
       <div className="box is-size-4 has-text-white is-full-height">
         <img src={profile.profilePic}></img>
          <p>
-          Welcome
-          {profile.name}
-          !
+          Welcome {profile.name}!
         </p>
         <p>{profile.email}</p>
         <button className="button is-primary is-small" onClick={dispatchLogout}>Log Out</button>

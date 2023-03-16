@@ -4,6 +4,7 @@ const path = require('path');
 const authRoutes = require('./routes/authRouter');
 const weatherRouter = require('./routes/weatherRouter');
 const userRouter = require('./routes/userRouter');
+const userController = require('./controller/userController')
 
 require('dotenv').config();
 
@@ -15,22 +16,20 @@ app.use(express.urlencoded({ extended: false }));
 
 
 //dummy endpoint to verify user
-app.use('/api/verifyuser', (req, res)=>{
-  res.locals.query = req.query
-  res.status(200).json(res.locals.query);
-});
-
-//dummy endpoint to get userdetails
-app.use('/api/getuserdetails', (req, res)=>{
-  res.locals.query = req.query
-  res.status(200).json(res.locals.query);
+app.use('/api/verifyuser', userController.verifyUser, (req, res)=>{
+  res.status(200).json(res.locals.verified);
 });
 
 //dummy endpoint for usersignup
-app.use('/api/signup', (req, res)=>{
-  res.locals.query = req.body
-  res.status(200).json(res.locals.query);
+app.use('/api/signup', userController.createUser, (req, res)=>{
+  res.status(200).json(res.locals.createUserVerified);
 });
+
+//dummy endpoint to get userdetails
+app.use('/api/getuserdetails', userController.getUser, (req, res)=>{
+  res.status(200).json(res.locals.userData);
+});
+
 
 // creating a session instance
 // app.use(session({

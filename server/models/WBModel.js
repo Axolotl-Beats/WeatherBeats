@@ -1,26 +1,31 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv')
 
-const PG_URI = 'postgres://uhcjaauq:OWyyH4hUaT62YLT5Ja3YA5bFLZK1QtXa@isilo.db.elephantsql.com/uhcjaauq';
+dotenv.config()
+
+//const PG_URI = process.env.PG_URI
+const PG_URI = 'postgres://jlpfgtbf:dDt6Rypn_mf8c3PTu5R7Whm_wOpJoIGY@ruby.db.elephantsql.com/jlpfgtbf'
 
 const pool = new Pool({
-  connectionString: PG_URI,
-});
+  connectionString: PG_URI
+})
 
-// const client = new Client({
-//   user: 'uhcjaauq',
-//   host: 'postgres://uhcjaauq:OWyyH4hUaT62YLT5Ja3YA5bFLZK1QtXa@isilo.db.elephantsql.com/uhcjaauq',
-//   database: 'uhcjaauq',
-//   password: 'OWyyH4hUaT62YLT5Ja3YA5bFLZK1QtXa',
-//   port: 5432,
-// });
-
-pool.query("select username from users where username='sper'")
-  .then((data) => console.log(data.rows[0].username))
-  .catch((err) => console.log('user does not exist'));
 
 module.exports = {
   query: (text, params, callback) => {
-    console.log('executed query', text);
+    console.log('executed query:', text);
     return pool.query(text, params, callback);
   },
-};
+
+  getOneUser: (username) => {
+    const sqlQuery = `SELECT * FROM users u where u.username='${username}' LIMIT 1`
+    return pool.query(sqlQuery)
+  },
+
+  createOneUser: (username, hashedPassword, email, firstname, lastname, profileimage) => {
+    const sqlQuery = `INSERT INTO users (username, password, email, firstname, lastname, profileimage)
+    VALUES ('${username}', '${hashedPassword}', '${email}', '${firstname}','${lastname}','${profileimage}');`
+    console.log(sqlQuery)
+    return pool.query(sqlQuery)
+  },
+}

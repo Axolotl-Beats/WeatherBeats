@@ -58,30 +58,17 @@ export default function Signup() {
     //this code below is just forming it such that the inputs are transmitted to the endpoint,
     //but it is not yet connected properly to the backend
     
-    // const result = await Axios.post(`/api/signup`, {
-    //   username: inputUsername,
-    //   password: inputPassword,
-    //   email: inputEmail,
-    //   firstName: inputFirstName,
-    //   lastName: inputLastName,
-    //   profileImage: inputImage,
-    // })
-    // console.log(result)
-
-    //dispatch(updateAuthenticated(result.data))
-    //dispatch(updateAuthenticated(true))
-    //console.log('result', result.data)
+    const result = await Axios.post(`/api/signup`, {
+      username: inputUsername,
+      password: inputPassword,
+      email: inputEmail,
+      firstName: inputFirstName,
+      lastName: inputLastName,
+      profileImage: inputImage,
+    })
 
     window.location.replace('http://localhost:8080');
   }
-
-
-//   const dispatch = useDispatch();
-
-//   const dispatchFunction = async () => {
-//     const result = await Axios.get('/api/verifyuser');
-//     dispatch(updateAuthenticated(result))
-//   }
 
   return (
     <div class="hero-body">
