@@ -4,14 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: './client/index.jsx',
   // Default to development
-  mode: process.env.NODE_ENV || 'development',
+  mode: process.env.NODE_ENV,
+  entry: path.join(__dirname, 'client', 'index.js'),
   output: {
     // output production to /dist (change if you want)
-    path: `${__dirname}/dist`,
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].bundle.js',
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -60,9 +60,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './public', 'index.html'),
-      fileName: './index.html',
-      inject: true,
+      filename: 'index.html',
+      template: path.join(__dirname, 'public', 'index.html'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css/mystyles.css',
@@ -73,6 +72,7 @@ module.exports = {
     // historyApiFallback: true,
     // HMR nodemon for webpack
     hot: true,
+    historyApiFallback: true,
     liveReload: true,
     // static files
     static: {
