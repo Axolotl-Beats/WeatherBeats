@@ -18,32 +18,32 @@ export default function Signup() {
   
   const handleChangeUsername = (event) => {
     setInputUsername(event.target.value);
-    console.log('username', event.target.value)
+    //console.log('username', event.target.value)
   };
 
   const handleChangePassword = (event) => {
     setInputPassword(event.target.value);
-    console.log('password', event.target.value)
+    //console.log('password', event.target.value)
   };
 
   const handleChangeEmail = (event) => {
     setInputEmail(event.target.value);
-    console.log('email', event.target.value)
+    //console.log('email', event.target.value)
   };
 
   const handleChangeFirstName = (event) => {
     setInputFirstName(event.target.value);
-    console.log('firstname', event.target.value)
+    //console.log('firstname', event.target.value)
   };
 
   const handleChangeLastName = (event) => {
     setInputLastName(event.target.value);
-    console.log('lastname', event.target.value)
+    //console.log('lastname', event.target.value)
   };
 
   const handleChangeImage = (event) => {
     setInputImage(event.target.value);
-    console.log('image', event.target.value)
+    //console.log('image', event.target.value)
   };
 
   const dispatch = useDispatch();
@@ -51,6 +51,30 @@ export default function Signup() {
   const dispatchFunctionLSContainer = () => {
     dispatch(updateLSContainer('login'))
   }
+
+  const dispatchFunctionSignup = async () => {
+
+    //const result = await Axios.get('/api/verifyuser'); //dummy api call for credentials
+    //this code below is just forming it such that the inputs are transmitted to the endpoint,
+    //but it is not yet connected properly to the backend
+    
+    const result = await Axios.post(`/api/signup`, {
+      username: inputUsername,
+      password: inputPassword,
+      email: inputEmail,
+      firstName: inputFirstName,
+      lastName: inputLastName,
+      profileImage: inputImage,
+    })
+    console.log(result)
+
+    //dispatch(updateAuthenticated(result.data))
+    //dispatch(updateAuthenticated(true))
+    //console.log('result', result.data)
+    //window.location.replace('http://localhost:8080');
+  }
+
+
 //   const dispatch = useDispatch();
 
 //   const dispatchFunction = async () => {
@@ -96,7 +120,7 @@ export default function Signup() {
                         <input name="imageLink" type="text" class="form__input" autofocus placeholder="Image Link" onChange={handleChangeImage}/>
                     </div>
 
-                    <button class="button is-large is-success is-fullwidth">SIGNUP</button>
+                    <button class="button is-large is-success is-fullwidth" onClick={dispatchFunctionSignup}>SIGNUP</button>
 
                   <div class="field">
                     <label onClick={dispatchFunctionLSContainer} class="label has-text-centered has-text-white">Sign In</label>
