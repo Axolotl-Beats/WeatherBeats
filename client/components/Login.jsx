@@ -28,8 +28,8 @@ export default function Login() {
     //this code below is just forming it such that the inputs are transmitted to the endpoint,
     //but it is not yet connected properly to the backend
     
-    const result = await Axios.get(`/api/verifyuser?username=${inputUsername}&password=${inputPassword}`)
-    console.log(result)
+    //const result = await Axios.get(`/api/verifyuser?username=${inputUsername}&password=${inputPassword}`)
+    //console.log(result)
 
     //dispatch(updateAuthenticated(result.data))
     dispatch(updateAuthenticated(true))

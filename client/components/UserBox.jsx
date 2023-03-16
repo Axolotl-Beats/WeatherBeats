@@ -18,7 +18,7 @@ export default function UserBox() {
     //const result = await Axios.get('/api/getuserdetails');
     //simulating the result in a real scenario
     //THIS IS NOT A SECURE WAY OF DOING IT
-    const result = await Axios.get(`/api/getuserdetails?username=${username}`);
+    //const result = await Axios.get(`/api/getuserdetails?username=${username}`);
 
     //dummy input to make sure it works
     const tmpResult = {name: "kitty-snake",
