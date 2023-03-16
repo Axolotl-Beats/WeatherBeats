@@ -16,7 +16,7 @@ const initialState = {
   bg: "https://images.hdqwalls.com/wallpapers/sunny-fields.jpg",
   playlist: playlistOptions,
   authenticated: false,
-  weatherObj: {"type":"blank", "city":"blank2", "temp":"blank3", "bg":"https://images2.alphacoders.com/143/143362.jpg"},
+  weatherObj: {"type":"blank", "city":"blank2", "temp":"blank3", "bg":"https://images2.alphacoders.com/143/143362.jpg", "playlist":"https://open.spotify.com/embed/playlist/37i9dQZF1EIhA3apoIYlV8"},
   profile: {},
   LSContainer: 'login',
 };
