@@ -17,7 +17,7 @@ export default function Zipcode() {
 
   const getNewWeatherData = async (input) => {
     const body = JSON.stringify({ zip: input });
-    console.log('This is the body:', body);
+    console.log('This is the body in axios function:', body);
     const weatherObj = await Axios.post('/weather', {
       body
     })

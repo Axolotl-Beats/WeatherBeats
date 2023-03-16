@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/authRouter');
 const weatherRouter = require('./routes/weatherRouter');
+const userRouter = require('./routes/userRouter');
 
 require('dotenv').config();
 
@@ -11,6 +12,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 //dummy endpoint to verify user
 app.use('/api/verifyuser', (req, res)=>{
@@ -31,17 +33,22 @@ app.use('/api/signup', (req, res)=>{
 });
 
 // creating a session instance
-app.use(session({
-  // secret is in .env file
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    // secure true will only persist the cookie in https
-    secure: false,
-  },
-}));
+// app.use(session({
+//   // secret is in .env file
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 * 7,
+//     // secure true will only persist the cookie in https
+//     secure: false,
+//   },
+// }));
+
+app.use('/api/verifytest', userRouter);
+
+
+
 
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
