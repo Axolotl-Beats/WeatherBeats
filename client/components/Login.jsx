@@ -23,9 +23,17 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const dispatchFunctionLogin = async () => {
-    const result = await Axios.get('/api/verifyuser');
-    dispatch(updateAuthenticated(result))
-    console.log('result', result)
+
+    //const result = await Axios.get('/api/verifyuser'); //dummy api call for credentials
+    //this code below is just forming it such that the inputs are transmitted to the endpoint,
+    //but it is not yet connected properly to the backend
+    
+    const result = await Axios.get(`/api/verifyuser?username=${inputUsername}&password=${inputPassword}`)
+    console.log(result)
+
+    //dispatch(updateAuthenticated(result.data))
+    dispatch(updateAuthenticated(true))
+    console.log('result', result.data)
   }
 
   const dispatchFunctionLSContainer = () => {

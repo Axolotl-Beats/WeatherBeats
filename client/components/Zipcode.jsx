@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll, updateWeatherObj
-} from '../redux/stateSlice';
+import { updateWeatherObj } from '../redux/stateSlice';
 import Axios from 'axios'
 
 // send fetch request to get weather from API based upon Zip Code
@@ -11,14 +9,11 @@ import Axios from 'axios'
 
 export default function Zipcode() {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState(10001);
+  const [location, setLocation] = useState("10001");
+  const [initial, setInitial] = useState(true)
   const weatherObj = useSelector((state) => state.updater.weatherObj);
 
-  console.log('weatherobject', weatherObj)
-  // useEffect(() => {
-  // }, []);
-
-  // on button click, fire reducers to update state and re-render page with new location
+  //console.log('initial', initial);
 
   const getNewWeatherData = async (input) => {
     const body = JSON.stringify({ zip: input });
@@ -26,12 +21,20 @@ export default function Zipcode() {
     const weatherObj = await Axios.post('/weather', {
       body
     })
-    console.log('weather', weatherObj.data);
+    //console.log('weather', weatherObj.data);
     dispatch(updateWeatherObj(weatherObj.data))
   }
 
-  //const { temp, city, type } = useSelector((state) => state.updater.weatherObj);
+  useEffect(async () => {
+    if (initial) {
+      setInitial(false)
+      getNewWeatherData("10001");
+    }
+    //console.log('initial', initial);
 
+   
+  }, []);
+  
   return (
     <div className="column">
       <div className="box is-align-content-center is-justify-content-center">

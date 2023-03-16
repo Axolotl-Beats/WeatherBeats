@@ -13,12 +13,23 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/api/verifyuser', (req, res) => {
-  res.status(200).json(true);
+
+//dummy endpoint to verify user
+app.use('/api/verifyuser', (req, res)=>{
+  res.locals.query = req.query
+  res.status(200).json(res.locals.query);
 });
 
-app.use('/api/getuserdetails', (req, res) => {
-  res.status(200).json({ name: 'kitty-snake', email: 'kittymeowhiss@gmail.com', profilePic: 'https://e7.pngegg.com/pngimages/918/791/png-clipart-ragnarok-online-poring-monster-ragnarok-illustration-poring-ragnarok-online-mammal-vertebrate-thumbnail.png' });
+//dummy endpoint to get userdetails
+app.use('/api/getuserdetails', (req, res)=>{
+  res.locals.query = req.query
+  res.status(200).json(res.locals.query);
+});
+
+//dummy endpoint for usersignup
+app.use('/api/signup', (req, res)=>{
+  res.locals.query = req.body
+  res.status(200).json(res.locals.query);
 });
 
 // creating a session instance
@@ -35,6 +46,10 @@ app.use('/api/getuserdetails', (req, res) => {
 // }));
 
 app.use('/api/verifytest', userRouter);
+
+
+
+
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);

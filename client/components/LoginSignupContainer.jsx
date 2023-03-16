@@ -7,7 +7,6 @@ import Signup from './Signup';
 
 export default function LoginSignupContainer() {
     const LSContainer = useSelector((state) => state.updater.LSContainer);
-    console.log('LSContainer', LSContainer)
 
     return (
         <>
