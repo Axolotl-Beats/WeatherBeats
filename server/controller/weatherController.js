@@ -1,3 +1,4 @@
+const { error } = require('console');
 const path = require('path');
 const weatherController = {};
 const API_KEY = 'dead5c9b084e896a899ac3479c1d786c';
@@ -8,6 +9,9 @@ weatherController.getData = async (req, res, next) => {
   let realBody = JSON.parse(req.body.body);
   //console.log(realBody);
   let zip = realBody.zip;
+  if (zip.length != 5 || typeof zip != 'string') {
+    return next(error);
+  }
   // zip = Number(zip);
   //console.log('the zip outside the body', typeof zip);
   const WEATHER_URL_ZIP = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${API_KEY}&units=imperial`;
@@ -22,6 +26,9 @@ weatherController.getData = async (req, res, next) => {
     iconUrl: `https://openweathermap.org/img/wn/${apiResponse.weather[0].icon}@2x.png`,
     bg: '',
   };
+  // if (responseObj.type === 'sunny') {
+  //   responseObj.bg = path.resolve(__dirname, '../client/asset/');
+  // } 
   //   console.log(apiResponse)
   res.locals.response = responseObj;
   //console.log("This is res.locals: ", res.locals.response)
