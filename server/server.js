@@ -3,40 +3,38 @@ const session = require('express-session');
 const path = require('path');
 const authRoutes = require('./routes/authRouter');
 const weatherRouter = require('./routes/weatherRouter');
+const userRouter = require('./routes/userRouter');
 
 require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
 
-app.use('/api/verifyuser', (req, res)=>{
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use('/api/verifyuser', (req, res) => {
   res.status(200).json(true);
 });
 
-app.use('/api/getuserdetails', (req, res)=>{
-  res.status(200).json({name: "kitty-snake", email: "kitty-meow-hiss@gmail.com", profilePic: "https://e7.pngegg.com/pngimages/918/791/png-clipart-ragnarok-online-poring-monster-ragnarok-illustration-poring-ragnarok-online-mammal-vertebrate-thumbnail.png"});
+app.use('/api/getuserdetails', (req, res) => {
+  res.status(200).json({ name: 'kitty-snake', email: 'kittymeowhiss@gmail.com', profilePic: 'https://e7.pngegg.com/pngimages/918/791/png-clipart-ragnarok-online-poring-monster-ragnarok-illustration-poring-ragnarok-online-mammal-vertebrate-thumbnail.png' });
 });
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 // creating a session instance
-app.use(session({
-  // secret is in .env file
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7,
-    // secure true will only persist the cookie in https
-    secure: false,
-  },
-}));
+// app.use(session({
+//   // secret is in .env file
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24 * 7,
+//     // secure true will only persist the cookie in https
+//     secure: false,
+//   },
+// }));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-
+app.use('/api/verifytest', userRouter);
 // Todo: get request for weather type
 app.use('/auth', authRoutes);
 app.use('/weather', weatherRouter);
