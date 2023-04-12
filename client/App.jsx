@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Login from './components/Login';
 import Player from './components/Player';
-// import Main from './components/Main';
+import Main from './components/Main';
 
 function App() {
   const [token, setToken] = useState('');
