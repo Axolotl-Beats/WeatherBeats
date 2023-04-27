@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-function Player({ token, playlistUri }) {
+function Player({ playlistUri }) {
+  const weatherObj = useSelector((state) => state.updater.weatherObj);
   return (
     <iframe
-      src={`https://open.spotify.com/embed/playlist/${playlistUri}?access_token=${token}&autoplay=true`}
+      src={`${weatherObj.playlist}`}
       title="Spotify Player"
       width="300"
       height="380"
@@ -13,5 +15,4 @@ function Player({ token, playlistUri }) {
   );
 }
 
-// https://open.spotify.com/playlist/37i9dQZF1DX889U0CL85jj?si=491b69f1290a4f93
 export default Player;

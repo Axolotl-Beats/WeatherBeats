@@ -1,28 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Main from './Main';
-import Login from './Login';
+import LoginSignUpContainer from './LoginSignupContainer';
 // import WebPlayback from './WebPlayback';
+import { Route, Routes, BrowserRouter, Link, Navigate } from 'react-router-dom'
 
 export default function App() {
-  const [token, setToken] = useState('');
-  const bg = useSelector((state) => state.updater.bg);
-
-  useEffect(() => {
-    async function getToken() {
-      const response = await fetch('/auth/token');
-      const json = await response.json();
-      // saves token to state
-      setToken(json.access_token);
-    }
-    getToken();
-  }, []);
+  const authenticated = useSelector((state) => state.updater.authenticated);
+  const weatherObj = useSelector((state) => state.updater.weatherObj);
 
   return (
-    <section id="app" className="hero is-fullheight">
-      <Main />
+
+    <section id="app" className="hero is-fullheight" style={{backgroundImage: `url(${weatherObj.bg})`}}>
+        {authenticated? <Main /> : <LoginSignUpContainer />}
     </section>
   );
 }
-
-// {backgroundImage: `url(${bg})`}

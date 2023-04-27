@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  updateType, updateTemp, updateZipcode, updateCity, updateUrl, updateAll,
-} from '../redux/stateSlice';
+import { updateWeatherObj } from '../redux/stateSlice';
+import Axios from 'axios'
 
 // send fetch request to get weather from API based upon Zip Code
 
@@ -10,48 +9,32 @@ import {
 
 export default function Zipcode() {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState(10001);
+  const [location, setLocation] = useState("10001");
+  const [initial, setInitial] = useState(true)
+  const weatherObj = useSelector((state) => state.updater.weatherObj);
 
-  useEffect(() => {
-    // on-load, fetch weather data from the weather API
-    async function getWeatherData(input) {
-      const body = JSON.stringify({ zip: input });
-      console.log('This is the body:', body);
-      const response = await fetch('/api/weather', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body,
-      });
-      const newData = await response.json();
-      console.log('This is body data', newData);
-      return newData;
-    }
+  //console.log('initial', initial);
 
-    // invoke the function
-    const data = getWeatherData(location);
-  }, []);
-
-  // on button click, fire reducers to update state and re-render page with new location
-
-  function getNewWeatherData(input) {
+  const getNewWeatherData = async (input) => {
     const body = JSON.stringify({ zip: input });
-    console.log('This is the body:', body);
-    fetch('/api/weather', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body,
+    console.log('This is the body in axios function:', body);
+    const weatherObj = await Axios.post('/weather', {
+      body
     })
-      .then((response) => response.json())
-      .then((response) => dispatch(updateAll(response)))
-      .then((response) => console.log('This is the reponse after UpdateAll', response));
+    //console.log('weather', weatherObj.data);
+    dispatch(updateWeatherObj(weatherObj.data))
   }
 
-  const { temp, city, type } = useSelector((state) => state.updater);
+  useEffect(async () => {
+    if (initial) {
+      setInitial(false)
+      getNewWeatherData("10001");
+    }
+    //console.log('initial', initial);
 
+   
+  }, []);
+  
   return (
     <div className="column">
       <div className="box is-align-content-center is-justify-content-center">
@@ -67,14 +50,14 @@ export default function Zipcode() {
           </div>
           <p className="control">
 
-            <a className="button is-primary has-text-weight-bold is-size-4 has-text-light" onClick={() => getNewWeatherData(location)}>Location</a>
+            <a className="button is-primary has-text-weight-bold is-size-4 has-text-light" onClick={()=>getNewWeatherData(location)}>Location</a>
           </p>
         </div>
 
         <footer className="card-footer">
-          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{type}</p>
-          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{city}</p>
-          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{temp}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey is-capitalized">{weatherObj.city}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey has-text-centered">{weatherObj.type}</p>
+          <p className="card-footer-item has-text-weight-bold is-size-4 has-text-grey">{weatherObj.temp}</p>
         </footer>
 
       </div>
